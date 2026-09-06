@@ -5,7 +5,6 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\AbstractPaginator;
-use App\Http\Resources\ProductCategoryResource;
 
 class PaginatedResource extends JsonResource
 {
@@ -24,8 +23,10 @@ class PaginatedResource extends JsonResource
      */
     public function toArray($request): array
     {
+        $resourceClass = $this->resourceClass;
+
         return [
-            'items' => ProductCategoryResource::collection($this->resource->items()),
+            'items' => $resourceClass::collection($this->resource->items()),
             'pagination' => [
                 'current_page' => $this->resource->currentPage(),
                 'per_page'     => $this->resource->perPage(),
