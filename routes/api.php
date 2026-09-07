@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\V1\ProductCategoryImageController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\ProductImageController;
 use App\Http\Controllers\Api\V1\CustomerController;
+use App\Http\Controllers\Api\V1\TransactionController;
 
 Route::prefix('v1')->group(function() {
     Route::post('/login', [AuthController::class, 'login']);
@@ -25,5 +26,7 @@ Route::prefix('v1')->group(function() {
         
         Route::get('customers/options', [CustomerController::class, 'options']);
         Route::apiResource('customers', CustomerController::class);
+
+        Route::apiResource('transactions', TransactionController::class)->only(['index', 'store', 'show']);
     });
 });
